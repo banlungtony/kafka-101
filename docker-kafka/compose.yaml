@@ -1,0 +1,11 @@
+services:
+  consumer-a-1:
+    build: ./consumer-a/.
+  consumer-a-2:
+    build: ./consumer-a/.
+  consumer-b-1:
+    build: ./consumer-b/.
+  consumer-b-2:
+    build: ./consumer-b/.
+  producer:
+    build: ./producer/.

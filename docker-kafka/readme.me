@@ -1,0 +1,23 @@
+### produce
+docker-compose up producer
+
+### consumer group a
+docker-compose up consumer-a-1
+docker-compose up consumer-a-2
+
+### consumer group b
+docker-compose up consumer-b-1
+docker-compose up consumer-b-2
+
+##Noted.
+Mac OS High Sierra / Mojave
+OpenSSL has been upgraded in High Sierra and homebrew does not overwrite default system libraries. That means when building node-rdkafka, because you are using openssl, you need to tell the linker where to find it:
+
+export CPPFLAGS=-I/usr/local/opt/openssl/include
+export LDFLAGS=-L/usr/local/opt/openssl/lib
+Then you can run npm install on your application to get it to build correctly.
+
+NOTE: From the librdkafka docs
+
+WARNING: Due to a bug in Apache Kafka 0.9.0.x, the ApiVersionRequest (as sent by the client when connecting to the broker) will be silently ignored by the broker causing the request to time out after 10 seconds. This causes client-broker connections to stall for 10 seconds during connection-setup before librdkafka falls back on the broker.version.fallback protocol features. The workaround is to explicitly configure api.version.request to false on clients communicating with <=0.9.0.x brokers.
+
